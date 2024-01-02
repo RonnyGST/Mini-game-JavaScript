@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Battle for Life</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style/game_style.css">
+        <script type="text/javascript" src="src/script.js"></script>
+    </head>
+    
+    <body>
+        <div class="link">
+            <a href="index.html" class="link">Home page</a>
+        </div>
+
+        <h1>Este é o game!</h1>
+        
+        <h1>Player 1</h1>
+
+        <table>
+            <tr>
+                <td>Guerreiro</td>
+                <td><button onclick="mainGuerreiroLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainGuerreiroHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainGuerreiroRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainGuerreiroRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusGuerreiro()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Mago</td>
+                <td><button onclick="mainMagoLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainMagoHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainMagoRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainMagoRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusMago()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Monge</td>
+                <td><button onclick="mainMongeLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainMongeHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainMongeRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainMongeRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusMonge()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Ninja</td>
+                <td><button onclick="mainNinjaLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainNinjaHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainNinjaRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainNinjaRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusNinja()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Arqueiro</td>
+                <td><button onclick="mainArqueiroLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainArqueiroHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainArqueiroRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainArqueiroRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusArqueiro()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Orc</td>
+                <td><button onclick="mainOrcLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainOrcHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainOrcRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainOrcRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusOrc()">Status</button></td>
+            </tr>
+        </table>
+
+
+        <h1>Player 2</h1>
+
+        <table>
+            <tr>
+                <td>Guerreiro</td>
+                <td><button onclick="mainGuerreiroBLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainGuerreiroBHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainGuerreiroBRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainGuerreiroBRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusGuerreiroB()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Mago</td>
+                <td><button onclick="mainMagoBLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainMagoBHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainMagoBRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainMagoBRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusMagoB()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Monge</td>
+                <td><button onclick="mainMongeBLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainMongeBHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainMongeBRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainMongeBRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusMongeB()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Ninja</td>
+                <td><button onclick="mainNinjaBLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainNinjaBHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainNinjaBRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainNinjaBRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusNinjaB()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Arqueiro</td>
+                <td><button onclick="mainArqueiroBLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainArqueiroBHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainArqueiroBRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainArqueiroBRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusArqueiroB()">Status</button></td>
+            </tr>
+
+            <tr>
+                <td>Orc</td>
+                <td><button onclick="mainOrcBLightAttack()">Ataque leve</button></td>
+                <td><button onclick="mainOrcBHeavyAttack()">Ataque pesado</button></td>
+                <td><button onclick="mainOrcBRecoverStamina()">Recuperar Stamina</button></td>
+                <td><button onclick="mainOrcBRecoverHP()">Usar item</button></td>
+                <td><button onclick="showStatusOrcB()">Status</button></td>
+            </tr>
+        </table>
+
+        <footer>
+            <p>Copyright (c) 2024 Ronny Gustavo Santos Teixeira</p>
+        </footer>
+    </body>
+</html>

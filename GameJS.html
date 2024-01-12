@@ -9,7 +9,7 @@
     </head>
     
     <body>
-        <div class="link">
+        <div id="homeAnim">
             <a href="index.html" class="link">Home page</a>
         </div>
 
@@ -17,8 +17,26 @@
         
         <h1>Player 1</h1>
 
+        <div id="p1chooseClass">
+            <div id="childElementp1">
+                <h2>Escolha sua classe:</h2>
+                <button onclick="p1chooseGuerreiro()">Guerreiro</button>
+                <button onclick="p1chooseMago()">Mago</button>
+                <button onclick="p1chooseMonge()">Monge</button>
+                <button onclick="p1chooseNinja()">Ninja</button>
+                <button onclick="p1chooseArqueiro()">Arqueiro</button>
+                <button onclick="p1chooseOrc()">Orc</button>
+            </div>
+            
+        </div>
+        
+
+        <div id="p1HideBox">
+
+        </div>
+
         <table>
-            <tr>
+            <tr id="p1Guerreiro">
                 <td>Guerreiro</td>
                 <td><button onclick="mainGuerreiroLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainGuerreiroHeavyAttack()">Ataque pesado</button></td>
@@ -27,7 +45,7 @@
                 <td><button onclick="showStatusGuerreiro()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p1Mago">
                 <td>Mago</td>
                 <td><button onclick="mainMagoLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainMagoHeavyAttack()">Ataque pesado</button></td>
@@ -36,7 +54,7 @@
                 <td><button onclick="showStatusMago()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p1Monge">
                 <td>Monge</td>
                 <td><button onclick="mainMongeLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainMongeHeavyAttack()">Ataque pesado</button></td>
@@ -45,7 +63,7 @@
                 <td><button onclick="showStatusMonge()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p1Ninja">
                 <td>Ninja</td>
                 <td><button onclick="mainNinjaLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainNinjaHeavyAttack()">Ataque pesado</button></td>
@@ -54,7 +72,7 @@
                 <td><button onclick="showStatusNinja()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p1Arqueiro">
                 <td>Arqueiro</td>
                 <td><button onclick="mainArqueiroLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainArqueiroHeavyAttack()">Ataque pesado</button></td>
@@ -63,7 +81,7 @@
                 <td><button onclick="showStatusArqueiro()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p1Orc">
                 <td>Orc</td>
                 <td><button onclick="mainOrcLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainOrcHeavyAttack()">Ataque pesado</button></td>
@@ -76,8 +94,25 @@
 
         <h1>Player 2</h1>
 
+        <div id="p2chooseClass">
+            <div id="childElementp2">
+                <h2>Escolha sua classe:</h2>
+                <button onclick="p2chooseGuerreiro()">Guerreiro</button>
+                <button onclick="p2chooseMago()">Mago</button>
+                <button onclick="p2chooseMonge()">Monge</button>
+                <button onclick="p2chooseNinja()">Ninja</button>
+                <button onclick="p2chooseArqueiro()">Arqueiro</button>
+                <button onclick="p2chooseOrc()">Orc</button>
+            </div>
+            
+        </div>
+        
+
+        <div id="p2HideBox">
+
+        </div>
         <table>
-            <tr>
+            <tr id="p2Guerreiro">
                 <td>Guerreiro</td>
                 <td><button onclick="mainGuerreiroBLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainGuerreiroBHeavyAttack()">Ataque pesado</button></td>
@@ -86,7 +121,7 @@
                 <td><button onclick="showStatusGuerreiroB()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p2Mago">
                 <td>Mago</td>
                 <td><button onclick="mainMagoBLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainMagoBHeavyAttack()">Ataque pesado</button></td>
@@ -95,7 +130,7 @@
                 <td><button onclick="showStatusMagoB()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p2Monge">
                 <td>Monge</td>
                 <td><button onclick="mainMongeBLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainMongeBHeavyAttack()">Ataque pesado</button></td>
@@ -104,7 +139,7 @@
                 <td><button onclick="showStatusMongeB()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p2Ninja">
                 <td>Ninja</td>
                 <td><button onclick="mainNinjaBLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainNinjaBHeavyAttack()">Ataque pesado</button></td>
@@ -113,7 +148,7 @@
                 <td><button onclick="showStatusNinjaB()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p2Arqueiro">
                 <td>Arqueiro</td>
                 <td><button onclick="mainArqueiroBLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainArqueiroBHeavyAttack()">Ataque pesado</button></td>
@@ -122,7 +157,7 @@
                 <td><button onclick="showStatusArqueiroB()">Status</button></td>
             </tr>
 
-            <tr>
+            <tr id="p2Orc">
                 <td>Orc</td>
                 <td><button onclick="mainOrcBLightAttack()">Ataque leve</button></td>
                 <td><button onclick="mainOrcBHeavyAttack()">Ataque pesado</button></td>

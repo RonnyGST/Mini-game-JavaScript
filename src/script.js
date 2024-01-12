@@ -40,6 +40,72 @@ PLAYER 1
 
 
 
+//Funções de escolha da classe do personagem
+function p1chooseGuerreiro(){
+    //Pegando a referência do elemento com o id "p1Guerreiro"
+    let guerreiroRef = document.getElementById("p1Guerreiro");
+    //Sobrepondo o elemento por cima da "p1HideBox"
+    guerreiroRef.style.position = "absolute";
+
+    //Pegando a referência do elemento com o id "p1chooseClass"
+    let chooseClassRef = document.getElementById("p1chooseClass");
+    //Pegando a referência do elemento com o id "childElementp1"
+    let childRef = document.getElementById("childElementp1");
+    //Removendo o filho "childRef" do pai "chooseClassRef"
+    chooseClassRef.removeChild(childRef);
+}
+
+function p1chooseMago(){
+    let magoRef = document.getElementById("p1Mago");
+    magoRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p1chooseClass");
+    let childRef = document.getElementById("childElementp1");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p1chooseMonge(){
+    let mongeRef = document.getElementById("p1Monge");
+    mongeRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p1chooseClass");
+    let childRef = document.getElementById("childElementp1");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p1chooseNinja(){
+    let ninjaRef = document.getElementById("p1Ninja");
+    ninjaRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p1chooseClass");
+    let childRef = document.getElementById("childElementp1");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p1chooseArqueiro(){
+    let arqueiroRef = document.getElementById("p1Arqueiro");
+    arqueiroRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p1chooseClass");
+    let childRef = document.getElementById("childElementp1");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p1chooseOrc(){
+    let orcRef = document.getElementById("p1Orc");
+    orcRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p1chooseClass");
+    let childRef = document.getElementById("childElementp1");
+    chooseClassRef.removeChild(childRef);
+}
+
+
+
+
+
+
+
 //Funções de status do Player 1
 function showStatusGuerreiro(){
     alert(`${warrior.type}. HP: ${warrior.hp}, Stamina: ${warrior.stamina}, Itens: ${warrior.item}`);
@@ -59,6 +125,10 @@ function showStatusArqueiro(){
 function showStatusOrc(){
     alert(`${orc.type}. HP: ${orc.hp}, Stamina: ${orc.stamina}, Itens: ${orc.item}`);
 }
+
+
+
+
 
 
 //Funções main de execução de mecânicas do Guerreiro
@@ -97,6 +167,7 @@ function mainGuerreiroRecoverStamina(){
         alert("Sua Stamina está totalmente recuperada!");
     }
 }
+
 
 
 
@@ -1014,6 +1085,63 @@ PLAYER 2
 --------------------------------------------------------------------------------------------------------
 */
 
+
+
+
+//Funções de escolha da classe do personagem
+function p2chooseGuerreiro(){
+    let guerreiroRef = document.getElementById("p2Guerreiro");
+    guerreiroRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p2chooseClass");
+    let childRef = document.getElementById("childElementp2");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p2chooseMago(){
+    let magoRef = document.getElementById("p2Mago");
+    magoRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p2chooseClass");
+    let childRef = document.getElementById("childElementp2");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p2chooseMonge(){
+    let mongeRef = document.getElementById("p2Monge");
+    mongeRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p2chooseClass");
+    let childRef = document.getElementById("childElementp2");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p2chooseNinja(){
+    let ninjaRef = document.getElementById("p2Ninja");
+    ninjaRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p2chooseClass");
+    let childRef = document.getElementById("childElementp2");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p2chooseArqueiro(){
+    let arqueiroRef = document.getElementById("p2Arqueiro");
+    arqueiroRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p2chooseClass");
+    let childRef = document.getElementById("childElementp2");
+    chooseClassRef.removeChild(childRef);
+}
+
+function p2chooseOrc(){
+    let orcRef = document.getElementById("p2Orc");
+    orcRef.style.position = "absolute";
+
+    let chooseClassRef = document.getElementById("p2chooseClass");
+    let childRef = document.getElementById("childElementp2");
+    chooseClassRef.removeChild(childRef);
+}
 
 
 

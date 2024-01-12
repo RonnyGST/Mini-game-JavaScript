@@ -14,7 +14,7 @@ td {
     border: 2px solid black;
 }
 
-div {
+#homeAnim {
     width: 100px;
     height: 50px;
     text-align: center;
@@ -43,4 +43,24 @@ div {
 .link {
     text-decoration: none;
     color: black;
+}
+
+#p1chooseClass {
+    margin: 20px;
+}
+
+#p2chooseClass {
+    margin: 20px;
+}
+
+#p1HideBox {
+    padding: 76px 300px;
+    position: absolute;
+    background-color: white;
+}
+
+#p2HideBox {
+    padding: 76px 300px;
+    position: absolute;
+    background-color: white;
 }

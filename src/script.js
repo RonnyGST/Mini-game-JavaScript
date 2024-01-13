@@ -37,7 +37,19 @@ let orcB = new player("player 2", "Orc", 130, 60, 5);
 PLAYER 1
 --------------------------------------------------------------------------------------------------------
 */
+function aparecer(){
+    let player1Hud = document.getElementById("hudP1");
+    let texto = document.createTextNode("HP: " + warrior.hp);
+    player1Hud.appendChild(texto);
+}
 
+
+let hudGuerreiro = false;
+let hudMago = false;
+let hudMonge = false;
+let hudNinja = false;
+let hudArqueiro = false;
+let hudOrc = false;
 
 
 //Funções de escolha da classe do personagem
@@ -53,6 +65,12 @@ function p1chooseGuerreiro(){
     let childRef = document.getElementById("childElementp1");
     //Removendo o filho "childRef" do pai "chooseClassRef"
     chooseClassRef.removeChild(childRef);
+
+    hudGuerreiro = true;
+
+    if(hudGuerreiro){
+        
+    }
 }
 
 function p1chooseMago(){

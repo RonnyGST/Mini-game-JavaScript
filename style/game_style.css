@@ -50,17 +50,22 @@ td {
 }
 
 #p2chooseClass {
-    margin: 20px;
+    margin: 40px;
+    position: relative;
 }
 
 #p1HideBox {
-    padding: 76px 300px;
+    padding: 125px 300px;
     position: absolute;
     background-color: white;
 }
 
 #p2HideBox {
-    padding: 76px 300px;
+    padding: 125px 300px;
     position: absolute;
     background-color: white;
+}
+
+#hudP1 {
+    position: absolute;
 }

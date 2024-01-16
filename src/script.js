@@ -37,19 +37,44 @@ let orcB = new player("player 2", "Orc", 130, 60, 5);
 PLAYER 1
 --------------------------------------------------------------------------------------------------------
 */
-function aparecer(){
+
+//Esta variável determina se o hud deve ser atualizado ou não
+let pressedP1 = false;
+
+//Variáveis cujo objetivo é verificar qual classe de personagem foi escolhido pelo jogador 1
+let choseGuerreiro = false;
+let chooseMago = false;
+let chooseMonge = false;
+let chooseNinja = false;
+let chooseArqueiro = false;
+let chooseOrc = false;
+
+
+
+
+
+//Funções de atualização da HUD
+function hudGuerreiro(){
     let player1Hud = document.getElementById("hudP1");
-    let texto = document.createTextNode("HP: " + warrior.hp);
+    let texto = document.createTextNode("HP: " + warrior.hp + " Stamina: " + warrior.stamina + " Itens: " + warrior.item);
     player1Hud.appendChild(texto);
+
+    if(pressedP1){
+        player1Hud.innerHTML = ("HP: " + warrior.hp + " Stamina: " + warrior.stamina + " Itens: " + warrior.item);
+    }
+}
+
+function hudMago(){
+    let player1Hud = document.getElementById("hudP1");
+    let texto = document.createTextNode("HP: " + mago.hp + " Stamina: " + mago.stamina + " Itens: " + mago.item);
+    player1Hud.appendChild(texto);
+
+    if(pressedP1){
+        player1Hud.innerHTML = ("HP: " + mago.hp + " Stamina: " + mago.stamina + " Itens: " + mago.item);
+    }
 }
 
 
-let hudGuerreiro = false;
-let hudMago = false;
-let hudMonge = false;
-let hudNinja = false;
-let hudArqueiro = false;
-let hudOrc = false;
 
 
 //Funções de escolha da classe do personagem
@@ -66,11 +91,8 @@ function p1chooseGuerreiro(){
     //Removendo o filho "childRef" do pai "chooseClassRef"
     chooseClassRef.removeChild(childRef);
 
-    hudGuerreiro = true;
-
-    if(hudGuerreiro){
-        
-    }
+    hudGuerreiro();
+    choseGuerreiro = true;
 }
 
 function p1chooseMago(){
@@ -80,6 +102,9 @@ function p1chooseMago(){
     let chooseClassRef = document.getElementById("p1chooseClass");
     let childRef = document.getElementById("childElementp1");
     chooseClassRef.removeChild(childRef);
+
+    hudMago();
+    chooseMago = true;
 }
 
 function p1chooseMonge(){
@@ -156,6 +181,8 @@ function mainGuerreiroHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    pressedP1 = true;
+    hudGuerreiro()
 }
 function mainGuerreiroLightAttack(){
     if(warrior.stamina > 0){
@@ -163,6 +190,8 @@ function mainGuerreiroLightAttack(){
     }else{
         alert("Sem Stamina");
     }
+    pressedP1 = true;
+    hudGuerreiro()
 
 }
 function mainGuerreiroRecoverHP(){
@@ -176,6 +205,8 @@ function mainGuerreiroRecoverHP(){
     if(warrior.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
+    pressedP1 = true;
+    hudGuerreiro()
 
 }
 function mainGuerreiroRecoverStamina(){
@@ -184,6 +215,8 @@ function mainGuerreiroRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    pressedP1 = true;
+    hudGuerreiro()
 }
 
 
@@ -198,6 +231,8 @@ function mainMagoHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    pressedP1 = true;
+    hudMago();
 }
 function mainMagoLightAttack(){
     if(mago.stamina > 0){
@@ -205,27 +240,31 @@ function mainMagoLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-
+    pressedP1 = true;
+    hudMago();
 }
 function mainMagoRecoverHP(){
-    if (mago.hp < 100 && mago.item > 0) {
+    if (mago.hp < 70 && mago.item > 0) {
         recoverHPMago();
     }
-    if(mago.hp >= 100){
+    if(mago.hp >= 70){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP" + mago.hp);
     }
     if(mago.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    pressedP1 = true;
+    hudMago();
 }
 function mainMagoRecoverStamina(){
-    if (mago.stamina < 72) {
+    if (mago.stamina < 40) {
         recoverStaminaMago();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    pressedP1 = true;
+    hudMago();
 }
 
 
@@ -246,10 +285,10 @@ function mainMongeLightAttack(){
 
 }
 function mainMongeRecoverHP(){
-    if (monge.hp < 100 && monge.item > 0) {
+    if (monge.hp < 110 && monge.item > 0) {
         recoverHPMonge();
     }
-    if(monge.hp >= 100){
+    if(monge.hp >= 110){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP" + monge.hp);
     }
@@ -259,7 +298,7 @@ function mainMongeRecoverHP(){
 
 }
 function mainMongeRecoverStamina(){
-    if (monge.stamina < 72) {
+    if (monge.stamina < 100) {
         recoverStaminaMonge();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -284,10 +323,10 @@ function mainNinjaLightAttack(){
 
 }
 function mainNinjaRecoverHP(){
-    if (ninja.hp < 100 && ninja.item > 0) {
+    if (ninja.hp < 90 && ninja.item > 0) {
         recoverHPNinja();
     }
-    if(ninja.hp >= 100){
+    if(ninja.hp >= 90){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP" + ninja.hp);
     }
@@ -297,7 +336,7 @@ function mainNinjaRecoverHP(){
 
 }
 function mainNinjaRecoverStamina(){
-    if (ninja.stamina < 72) {
+    if (ninja.stamina < 100) {
         recoverStaminaNinja();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -322,10 +361,10 @@ function mainArqueiroLightAttack(){
 
 }
 function mainArqueiroRecoverHP(){
-    if (arqueiro.hp < 100 && arqueiro.item > 0) {
+    if (arqueiro.hp < 80 && arqueiro.item > 0) {
         recoverHPArqueiro();
     }
-    if(arqueiro.hp >= 100){
+    if(arqueiro.hp >= 80){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP" + arqueiro.hp);
     }
@@ -335,7 +374,7 @@ function mainArqueiroRecoverHP(){
 
 }
 function mainArqueiroRecoverStamina(){
-    if (arqueiro.stamina < 72) {
+    if (arqueiro.stamina < 120) {
         recoverStaminaArqueiro();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -360,10 +399,10 @@ function mainOrcLightAttack(){
 
 }
 function mainOrcRecoverHP(){
-    if (orc.hp < 100 && orc.item > 0) {
+    if (orc.hp < 130 && orc.item > 0) {
         recoverHPOrc();
     }
-    if(orc.hp >= 100){
+    if(orc.hp >= 130){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP" + orc.hp);
     }
@@ -373,7 +412,7 @@ function mainOrcRecoverHP(){
 
 }
 function mainOrcRecoverStamina(){
-    if (orc.stamina < 72) {
+    if (orc.stamina < 60) {
         recoverStaminaOrc();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -1193,6 +1232,20 @@ function mainGuerreiroBHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    pressedP1 = true;
+    //Atualizando a hud
+    switch (true) {
+        case choseGuerreiro === true:
+            hudGuerreiro();
+            break;
+
+        case chooseMago === true:
+            hudMago();
+    
+        default:
+            break;
+    }
+    
 }
 function mainGuerreiroBLightAttack(){
     if(warriorB.stamina > 0){
@@ -1241,10 +1294,10 @@ function mainMagoBLightAttack(){
 
 }
 function mainMagoBRecoverHP(){
-    if (magoB.hp < 100 && magoB.item > 0) {
+    if (magoB.hp < 70 && magoB.item > 0) {
         recoverHPMagoB();
     }
-    if(magoB.hp >= 100){
+    if(magoB.hp >= 70){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP: " + magoB.hp);
     }
@@ -1254,7 +1307,7 @@ function mainMagoBRecoverHP(){
 
 }
 function mainMagoBRecoverStamina(){
-    if (magoB.stamina < 72) {
+    if (magoB.stamina < 40) {
         recoverStaminaMagoB();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -1279,10 +1332,10 @@ function mainMongeBLightAttack(){
 
 }
 function mainMongeBRecoverHP(){
-    if (mongeB.hp < 100 && mongeB.item > 0) {
+    if (mongeB.hp < 110 && mongeB.item > 0) {
         recoverHPMongeB();
     }
-    if(mongeB.hp >= 100){
+    if(mongeB.hp >= 110){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP: " + mongeB.hp);
     }
@@ -1292,7 +1345,7 @@ function mainMongeBRecoverHP(){
 
 }
 function mainMongeBRecoverStamina(){
-    if (mongeB.stamina < 72) {
+    if (mongeB.stamina < 100) {
         recoverStaminaMongeB();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -1317,10 +1370,10 @@ function mainNinjaBLightAttack(){
 
 }
 function mainNinjaBRecoverHP(){
-    if (ninjaB.hp < 100 && ninjaB.item > 0) {
+    if (ninjaB.hp < 90 && ninjaB.item > 0) {
         recoverHPNinjaB();
     }
-    if(ninjaB.hp >= 100){
+    if(ninjaB.hp >= 90){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP: " + ninjaB.hp);
     }
@@ -1330,7 +1383,7 @@ function mainNinjaBRecoverHP(){
 
 }
 function mainNinjaBRecoverStamina(){
-    if (ninjaB.stamina < 72) {
+    if (ninjaB.stamina < 100) {
         recoverStaminaNinjaB();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -1355,10 +1408,10 @@ function mainArqueiroBLightAttack(){
 
 }
 function mainArqueiroBRecoverHP(){
-    if (arqueiroB.hp < 100 && arqueiroB.item > 0) {
+    if (arqueiroB.hp < 80 && arqueiroB.item > 0) {
         recoverHPArqueiroB();
     }
-    if(arqueiroB.hp >= 100){
+    if(arqueiroB.hp >= 80){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP: " + arqueiroB.hp);
     }
@@ -1368,7 +1421,7 @@ function mainArqueiroBRecoverHP(){
 
 }
 function mainArqueiroBRecoverStamina(){
-    if (arqueiroB.stamina < 72) {
+    if (arqueiroB.stamina < 120) {
         recoverStaminaArqueiroB();
     }else{
         alert("Sua Stamina está totalmente recuperada!");
@@ -1393,10 +1446,10 @@ function mainOrcBLightAttack(){
 
 }
 function mainOrcBRecoverHP(){
-    if (orcB.hp < 100 && orcB.item > 0) {
+    if (orcB.hp < 130 && orcB.item > 0) {
         recoverHPOrcB();
     }
-    if(orcB.hp >= 100){
+    if(orcB.hp >= 130){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
         alert("Seu HP: " + orcB.hp);
     }
@@ -1406,7 +1459,7 @@ function mainOrcBRecoverHP(){
 
 }
 function mainOrcBRecoverStamina(){
-    if (orcB.stamina < 72) {
+    if (orcB.stamina < 60) {
         recoverStaminaOrcB();
     }else{
         alert("Sua Stamina está totalmente recuperada!");

@@ -39,7 +39,7 @@ PLAYER 1
 */
 
 //Esta variável determina se o hud deve ser atualizado ou não
-let pressedP1 = false;
+let updateHudP1 = false;
 
 //Variáveis cujo objetivo é verificar qual classe de personagem foi escolhido pelo jogador 1
 let choseGuerreiro = false;
@@ -59,7 +59,7 @@ function hudGuerreiro(){
     let texto = document.createTextNode("HP: " + warrior.hp + " Stamina: " + warrior.stamina + " Itens: " + warrior.item);
     player1Hud.appendChild(texto);
 
-    if(pressedP1){
+    if(updateHudP1){
         player1Hud.innerHTML = ("HP: " + warrior.hp + " Stamina: " + warrior.stamina + " Itens: " + warrior.item);
     }
 }
@@ -69,8 +69,48 @@ function hudMago(){
     let texto = document.createTextNode("HP: " + mago.hp + " Stamina: " + mago.stamina + " Itens: " + mago.item);
     player1Hud.appendChild(texto);
 
-    if(pressedP1){
+    if(updateHudP1){
         player1Hud.innerHTML = ("HP: " + mago.hp + " Stamina: " + mago.stamina + " Itens: " + mago.item);
+    }
+}
+
+function hudMonge(){
+    let player1Hud = document.getElementById("hudP1");
+    let texto = document.createTextNode("HP: " + monge.hp + " Stamina: " + monge.stamina + " Itens: " + monge.item);
+    player1Hud.appendChild(texto);
+
+    if(updateHudP1){
+        player1Hud.innerHTML = ("HP: " + monge.hp + " Stamina: " + monge.stamina + " Itens: " + monge.item);
+    }
+}
+
+function hudNinja(){
+    let player1Hud = document.getElementById("hudP1");
+    let texto = document.createTextNode("HP: " + ninja.hp + " Stamina: " + ninja.stamina + " Itens: " + ninja.item);
+    player1Hud.appendChild(texto);
+
+    if(updateHudP1){
+        player1Hud.innerHTML = ("HP: " + ninja.hp + " Stamina: " + ninja.stamina + " Itens: " + ninja.item);
+    }
+}
+
+function hudArqueiro(){
+    let player1Hud = document.getElementById("hudP1");
+    let texto = document.createTextNode("HP: " + arqueiro.hp + " Stamina: " + arqueiro.stamina + " Itens: " + arqueiro.item);
+    player1Hud.appendChild(texto);
+
+    if(updateHudP1){
+        player1Hud.innerHTML = ("HP: " + arqueiro.hp + " Stamina: " + arqueiro.stamina + " Itens: " + arqueiro.item);
+    }
+}
+
+function hudOrc(){
+    let player1Hud = document.getElementById("hudP1");
+    let texto = document.createTextNode("HP: " + orc.hp + " Stamina: " + orc.stamina + " Itens: " + orc.item);
+    player1Hud.appendChild(texto);
+
+    if(updateHudP1){
+        player1Hud.innerHTML = ("HP: " + orc.hp + " Stamina: " + orc.stamina + " Itens: " + orc.item);
     }
 }
 
@@ -114,6 +154,9 @@ function p1chooseMonge(){
     let chooseClassRef = document.getElementById("p1chooseClass");
     let childRef = document.getElementById("childElementp1");
     chooseClassRef.removeChild(childRef);
+
+    hudMonge();
+    chooseMonge = true;
 }
 
 function p1chooseNinja(){
@@ -123,6 +166,9 @@ function p1chooseNinja(){
     let chooseClassRef = document.getElementById("p1chooseClass");
     let childRef = document.getElementById("childElementp1");
     chooseClassRef.removeChild(childRef);
+
+    hudNinja();
+    chooseNinja = true;
 }
 
 function p1chooseArqueiro(){
@@ -132,6 +178,9 @@ function p1chooseArqueiro(){
     let chooseClassRef = document.getElementById("p1chooseClass");
     let childRef = document.getElementById("childElementp1");
     chooseClassRef.removeChild(childRef);
+
+    hudArqueiro();
+    chooseArqueiro = true
 }
 
 function p1chooseOrc(){
@@ -141,6 +190,9 @@ function p1chooseOrc(){
     let chooseClassRef = document.getElementById("p1chooseClass");
     let childRef = document.getElementById("childElementp1");
     chooseClassRef.removeChild(childRef);
+
+    hudOrc();
+    chooseOrc = true;
 }
 
 
@@ -181,7 +233,7 @@ function mainGuerreiroHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudGuerreiro()
 }
 function mainGuerreiroLightAttack(){
@@ -190,7 +242,7 @@ function mainGuerreiroLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudGuerreiro()
 
 }
@@ -205,7 +257,7 @@ function mainGuerreiroRecoverHP(){
     if(warrior.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudGuerreiro()
 
 }
@@ -215,7 +267,7 @@ function mainGuerreiroRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudGuerreiro()
 }
 
@@ -231,7 +283,7 @@ function mainMagoHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudMago();
 }
 function mainMagoLightAttack(){
@@ -240,7 +292,7 @@ function mainMagoLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudMago();
 }
 function mainMagoRecoverHP(){
@@ -254,7 +306,7 @@ function mainMagoRecoverHP(){
     if(mago.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudMago();
 }
 function mainMagoRecoverStamina(){
@@ -263,7 +315,7 @@ function mainMagoRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     hudMago();
 }
 
@@ -275,6 +327,8 @@ function mainMongeHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    updateHudP1 = true;
+    hudMonge();
 }
 function mainMongeLightAttack(){
     if(monge.stamina > 0){
@@ -282,7 +336,8 @@ function mainMongeLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-
+    updateHudP1 = true;
+    hudMonge();
 }
 function mainMongeRecoverHP(){
     if (monge.hp < 110 && monge.item > 0) {
@@ -295,7 +350,8 @@ function mainMongeRecoverHP(){
     if(monge.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    updateHudP1 = true;
+    hudMonge();
 }
 function mainMongeRecoverStamina(){
     if (monge.stamina < 100) {
@@ -303,6 +359,8 @@ function mainMongeRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    updateHudP1 = true;
+    hudMonge();
 }
 
 
@@ -313,6 +371,8 @@ function mainNinjaHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    updateHudP1 = true;
+    hudNinja();
 }
 function mainNinjaLightAttack(){
     if(ninja.stamina > 0){
@@ -320,7 +380,8 @@ function mainNinjaLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-
+    updateHudP1 = true;
+    hudNinja();
 }
 function mainNinjaRecoverHP(){
     if (ninja.hp < 90 && ninja.item > 0) {
@@ -333,7 +394,8 @@ function mainNinjaRecoverHP(){
     if(ninja.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    updateHudP1 = true;
+    hudNinja();
 }
 function mainNinjaRecoverStamina(){
     if (ninja.stamina < 100) {
@@ -341,6 +403,8 @@ function mainNinjaRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    updateHudP1 = true;
+    hudNinja();
 }
 
 
@@ -351,6 +415,8 @@ function mainArqueiroHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    updateHudP1 = true;
+    hudArqueiro();
 }
 function mainArqueiroLightAttack(){
     if(arqueiro.stamina > 0){
@@ -358,7 +424,8 @@ function mainArqueiroLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-
+    updateHudP1 = true;
+    hudArqueiro();
 }
 function mainArqueiroRecoverHP(){
     if (arqueiro.hp < 80 && arqueiro.item > 0) {
@@ -371,7 +438,8 @@ function mainArqueiroRecoverHP(){
     if(arqueiro.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    updateHudP1 = true;
+    hudArqueiro();
 }
 function mainArqueiroRecoverStamina(){
     if (arqueiro.stamina < 120) {
@@ -379,6 +447,8 @@ function mainArqueiroRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    updateHudP1 = true;
+    hudArqueiro();
 }
 
 
@@ -389,6 +459,8 @@ function mainOrcHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
+    updateHudP1 = true;
+    hudOrc();
 }
 function mainOrcLightAttack(){
     if(orc.stamina > 0){
@@ -396,7 +468,8 @@ function mainOrcLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-
+    updateHudP1 = true;
+    hudOrc();
 }
 function mainOrcRecoverHP(){
     if (orc.hp < 130 && orc.item > 0) {
@@ -409,7 +482,8 @@ function mainOrcRecoverHP(){
     if(orc.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    updateHudP1 = true;
+    hudOrc();
 }
 function mainOrcRecoverStamina(){
     if (orc.stamina < 60) {
@@ -417,6 +491,8 @@ function mainOrcRecoverStamina(){
     }else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    updateHudP1 = true;
+    hudOrc();
 }
 
 
@@ -1142,7 +1218,38 @@ PLAYER 2
 --------------------------------------------------------------------------------------------------------
 */
 
+function pave(){
+    updateHudP1 = true;
+    //Atualizando a hud
+    switch (true) {
+        case choseGuerreiro === true:
+            hudGuerreiro();
+            break;
 
+        case chooseMago === true:
+            hudMago();
+            break;
+
+        case chooseMonge === true:
+            hudMonge();
+            break;
+
+        case chooseNinja === true:
+            hudNinja();
+            break;
+
+        case chooseArqueiro === true:
+            hudArqueiro();
+            break;
+
+        case chooseOrc === true:
+            hudOrc();
+            break;
+    
+        default:
+            break;
+    }
+}
 
 
 //Funções de escolha da classe do personagem
@@ -1232,7 +1339,7 @@ function mainGuerreiroBHeavyAttack(){
     } else{
         alert("Sem Stamina");
     }
-    pressedP1 = true;
+    updateHudP1 = true;
     //Atualizando a hud
     switch (true) {
         case choseGuerreiro === true:
@@ -1241,6 +1348,23 @@ function mainGuerreiroBHeavyAttack(){
 
         case chooseMago === true:
             hudMago();
+            break;
+
+        case chooseMonge === true:
+            hudMonge();
+            break;
+
+        case chooseNinja === true:
+            hudNinja();
+            break;
+
+        case chooseArqueiro === true:
+            hudArqueiro();
+            break;
+
+        case chooseOrc === true:
+            hudOrc();
+            break;
     
         default:
             break;
@@ -1253,7 +1377,7 @@ function mainGuerreiroBLightAttack(){
     }else{
         alert("Sem Stamina");
     }
-
+    pave()
 }
 function mainGuerreiroBRecoverHP(){
     if (warriorB.hp < 100 && warriorB.item > 0) {

@@ -32,14 +32,14 @@ let orcB = new player("player 2", "Orc", 130, 60, 5);
 
 
 
-/*
---------------------------------------------------------------------------------------------------------
-PLAYER 1
---------------------------------------------------------------------------------------------------------
-*/
+//Variáveis que determinam se é a vez do player 1 ou do player 2
+let canPlayP1 = true;
+let canPlayP2 = true;
 
-//Esta variável determina se o hud deve ser atualizado ou não
-let updateHudP1 = false;
+
+//Esta variável determina se o hud do player deve ser atualizado ou não
+let canUpdateHud = false;
+
 
 //Variáveis cujo objetivo é verificar qual classe de personagem foi escolhido pelo jogador 1
 let choseGuerreiro = false;
@@ -50,16 +50,124 @@ let chooseArqueiro = false;
 let chooseOrc = false;
 
 
+//Variáveis cujo objetivo é verificar qual classe de personagem foi escolhido pelo jogador 2
+let choseGuerreiroB = false;
+let chooseMagoB = false;
+let chooseMongeB = false;
+let chooseNinjaB = false;
+let chooseArqueiroB = false;
+let chooseOrcB = false;
 
 
 
-//Funções de atualização da HUD
+
+//Atualizando a HUD do player 1 quando ele recebe dano.
+function updatingHudP1(){
+    canUpdateHud = true;
+    //Atualizando a hud
+    switch (true) {
+        case choseGuerreiro === true:
+            hudGuerreiro();
+            break;
+
+        case chooseMago === true:
+            hudMago();
+            break;
+
+        case chooseMonge === true:
+            hudMonge();
+            break;
+
+        case chooseNinja === true:
+            hudNinja();
+            break;
+
+        case chooseArqueiro === true:
+            hudArqueiro();
+            break;
+
+        case chooseOrc === true:
+            hudOrc();
+            break;
+    
+        default:
+            break;
+    }
+}
+
+
+
+
+//Atualizando a HUD do player 2 quando ele recebe dano.
+function updatingHudP2(){
+    canUpdateHud = true;
+    //Atualizando a hud
+    switch (true) {
+        case choseGuerreiroB === true:
+            hudGuerreiroB();
+            break;
+
+        case chooseMagoB === true:
+            hudMagoB();
+            break;
+
+        case chooseMongeB === true:
+            hudMongeB();
+            break;
+
+        case chooseNinjaB === true:
+            hudNinjaB();
+            break;
+
+        case chooseArqueiroB === true:
+            hudArqueiroB();
+            break;
+
+        case chooseOrcB === true:
+            hudOrcB();
+            break;
+    
+        default:
+            break;
+    }
+}
+
+
+
+/*
+--------------------------------------------------------------------------------------------------------
+PLAYER 1
+--------------------------------------------------------------------------------------------------------
+*/
+
+let canEraseLog = true;
+let messageLogP1;
+
+let logP1Ref = document.getElementById("logP1");
+
+function updateLogP1(){
+
+    if(!canEraseLog){
+        logP1Ref.innerHTML = messageLogP1;
+    } else if(canEraseLog){
+        logP1Ref.innerHTML = "";
+    }
+    
+}
+
+
+
+
+//Funções de atualização da HUD do player 1
 function hudGuerreiro(){
+    //Pegando o id do parágrafo
     let player1Hud = document.getElementById("hudP1");
+    //Definindo o texto que será exibido
     let texto = document.createTextNode("HP: " + warrior.hp + " Stamina: " + warrior.stamina + " Itens: " + warrior.item);
     player1Hud.appendChild(texto);
 
-    if(updateHudP1){
+    //Se o hud puder ser atualizado, ele irá substituir o hud antigo pelo novo (que por acaso é o mesmo hud, porém irá mostrar os valores atualizados)
+    if(canUpdateHud){
         player1Hud.innerHTML = ("HP: " + warrior.hp + " Stamina: " + warrior.stamina + " Itens: " + warrior.item);
     }
 }
@@ -69,7 +177,7 @@ function hudMago(){
     let texto = document.createTextNode("HP: " + mago.hp + " Stamina: " + mago.stamina + " Itens: " + mago.item);
     player1Hud.appendChild(texto);
 
-    if(updateHudP1){
+    if(canUpdateHud){
         player1Hud.innerHTML = ("HP: " + mago.hp + " Stamina: " + mago.stamina + " Itens: " + mago.item);
     }
 }
@@ -79,7 +187,7 @@ function hudMonge(){
     let texto = document.createTextNode("HP: " + monge.hp + " Stamina: " + monge.stamina + " Itens: " + monge.item);
     player1Hud.appendChild(texto);
 
-    if(updateHudP1){
+    if(canUpdateHud){
         player1Hud.innerHTML = ("HP: " + monge.hp + " Stamina: " + monge.stamina + " Itens: " + monge.item);
     }
 }
@@ -89,7 +197,7 @@ function hudNinja(){
     let texto = document.createTextNode("HP: " + ninja.hp + " Stamina: " + ninja.stamina + " Itens: " + ninja.item);
     player1Hud.appendChild(texto);
 
-    if(updateHudP1){
+    if(canUpdateHud){
         player1Hud.innerHTML = ("HP: " + ninja.hp + " Stamina: " + ninja.stamina + " Itens: " + ninja.item);
     }
 }
@@ -99,7 +207,7 @@ function hudArqueiro(){
     let texto = document.createTextNode("HP: " + arqueiro.hp + " Stamina: " + arqueiro.stamina + " Itens: " + arqueiro.item);
     player1Hud.appendChild(texto);
 
-    if(updateHudP1){
+    if(canUpdateHud){
         player1Hud.innerHTML = ("HP: " + arqueiro.hp + " Stamina: " + arqueiro.stamina + " Itens: " + arqueiro.item);
     }
 }
@@ -109,7 +217,7 @@ function hudOrc(){
     let texto = document.createTextNode("HP: " + orc.hp + " Stamina: " + orc.stamina + " Itens: " + orc.item);
     player1Hud.appendChild(texto);
 
-    if(updateHudP1){
+    if(canUpdateHud){
         player1Hud.innerHTML = ("HP: " + orc.hp + " Stamina: " + orc.stamina + " Itens: " + orc.item);
     }
 }
@@ -131,7 +239,9 @@ function p1chooseGuerreiro(){
     //Removendo o filho "childRef" do pai "chooseClassRef"
     chooseClassRef.removeChild(childRef);
 
+    //Chamando a função do hud para que ela possa ser exibida assim que o jogador escolher o seu personagem
     hudGuerreiro();
+    //Dizendo para o código qual personagem foi escolhido
     choseGuerreiro = true;
 }
 
@@ -199,76 +309,71 @@ function p1chooseOrc(){
 
 
 
-
-
-//Funções de status do Player 1
-function showStatusGuerreiro(){
-    alert(`${warrior.type}. HP: ${warrior.hp}, Stamina: ${warrior.stamina}, Itens: ${warrior.item}`);
-}
-function showStatusMago(){
-    alert(`${mago.type}. HP: ${mago.hp}, Stamina: ${mago.stamina}, Itens: ${mago.item}`);
-}
-function showStatusMonge(){
-    alert(`${monge.type}. HP: ${monge.hp}, Stamina: ${monge.stamina}, Itens: ${monge.item}`);
-}
-function showStatusNinja(){
-    alert(`${ninja.type}. HP: ${ninja.hp}, Stamina: ${ninja.stamina}, Itens: ${ninja.item}`);
-}
-function showStatusArqueiro(){
-    alert(`${arqueiro.type}. HP: ${arqueiro.hp}, Stamina: ${arqueiro.stamina}, Itens: ${arqueiro.item}`);
-}
-function showStatusOrc(){
-    alert(`${orc.type}. HP: ${orc.hp}, Stamina: ${orc.stamina}, Itens: ${orc.item}`);
-}
-
-
-
-
-
-
 //Funções main de execução de mecânicas do Guerreiro
 function mainGuerreiroHeavyAttack(){
-    if (warrior.stamina > 0) {
+    //Se este personagem tiver stamina e for sua vez de jogar, poderá executar a ação de ataque
+    if (warrior.stamina > 0 && canPlayP1) {
         heavyAttackGuerreiro();
+        //Depois que o player fizer sua jogada, ele não poderá jogar outra vez em sequência
+        canPlayP1 = false;
+        //Agora o outro player poderá jogar
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
-    hudGuerreiro()
+    //Dizendo para o código que a hud pode ser atualizada
+    canUpdateHud = true;
+    //Atualizando a hud do personagem correspondente
+    hudGuerreiro();
+    //Atualizando a hud do player 2, pois ele recebeu dano por parte do player 1
+    updatingHudP2();
 }
 function mainGuerreiroLightAttack(){
-    if(warrior.stamina > 0){
+    if(warrior.stamina > 0 && canPlayP1){
         lightAttackGuerreiro();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
-    hudGuerreiro()
-
+    canUpdateHud = true;
+    hudGuerreiro();
+    updatingHudP2();
 }
 function mainGuerreiroRecoverHP(){
-    if (warrior.hp < 100 && warrior.item > 0) {
+    //Se o hp deste personagem for menor do que a quantidade estipulada e tiver pelo menos 1 item de cura, poderá executar a ação de recuperar hp
+    if (warrior.hp < 100 && warrior.item > 0 && canPlayP1) {
         recoverHPGuerreiro();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     }
     if(warrior.hp >= 100){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP" + warrior.hp);
     }
     if(warrior.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    updateHudP1 = true;
-    hudGuerreiro()
-
+    canUpdateHud = true;
+    hudGuerreiro();
 }
 function mainGuerreiroRecoverStamina(){
-    if (warrior.stamina < 72) {
+    if (warrior.stamina < 72 && canPlayP1) {
         recoverStaminaGuerreiro();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    updateHudP1 = true;
-    hudGuerreiro()
+    canUpdateHud = true;
+    hudGuerreiro();
 }
 
 
@@ -278,220 +383,305 @@ function mainGuerreiroRecoverStamina(){
 
 //Funções main de execução de mecânicas do Mago
 function mainMagoHeavyAttack(){
-    if (mago.stamina > 0) {
+    if (mago.stamina > 0 && canPlayP1) {
         heavyAttackMago();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMago();
+    updatingHudP2();
 }
 function mainMagoLightAttack(){
-    if(mago.stamina > 0){
+    if(mago.stamina > 0 && canPlayP1){
         lightAttackMago();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMago();
+    updatingHudP2();
 }
 function mainMagoRecoverHP(){
-    if (mago.hp < 70 && mago.item > 0) {
+    if (mago.hp < 70 && mago.item > 0 && canPlayP1) {
         recoverHPMago();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     }
     if(mago.hp >= 70){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP" + mago.hp);
     }
     if(mago.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMago();
 }
 function mainMagoRecoverStamina(){
-    if (mago.stamina < 40) {
+    if (mago.stamina < 40 && canPlayP1) {
         recoverStaminaMago();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMago();
 }
 
 
 //Funções main de execução de mecânicas do Monge
 function mainMongeHeavyAttack(){
-    if (monge.stamina > 0) {
+    if (monge.stamina > 0 && canPlayP1) {
         heavyAttackMonge();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMonge();
+    updatingHudP2();
 }
 function mainMongeLightAttack(){
-    if(monge.stamina > 0){
+    if(monge.stamina > 0 && canPlayP1){
         lightAttackMonge();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMonge();
+    updatingHudP2();
 }
 function mainMongeRecoverHP(){
-    if (monge.hp < 110 && monge.item > 0) {
+    if (monge.hp < 110 && monge.item > 0 && canPlayP1) {
         recoverHPMonge();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     }
     if(monge.hp >= 110){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP" + monge.hp);
     }
     if(monge.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMonge();
 }
 function mainMongeRecoverStamina(){
-    if (monge.stamina < 100) {
+    if (monge.stamina < 100 && canPlayP1) {
         recoverStaminaMonge();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudMonge();
 }
 
 
 //Funções main de execução de mecânicas do Ninja
 function mainNinjaHeavyAttack(){
-    if (ninja.stamina > 0) {
+    if (ninja.stamina > 0 && canPlayP1) {
         heavyAttackNinja();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudNinja();
+    updatingHudP2();
 }
 function mainNinjaLightAttack(){
-    if(ninja.stamina > 0){
+    if(ninja.stamina > 0 && canPlayP1){
         lightAttackNinja();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudNinja();
+    updatingHudP2();
 }
 function mainNinjaRecoverHP(){
-    if (ninja.hp < 90 && ninja.item > 0) {
+    if (ninja.hp < 90 && ninja.item > 0 && canPlayP1) {
         recoverHPNinja();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     }
     if(ninja.hp >= 90){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP" + ninja.hp);
     }
     if(ninja.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudNinja();
 }
 function mainNinjaRecoverStamina(){
-    if (ninja.stamina < 100) {
+    if (ninja.stamina < 100 && canPlayP1) {
         recoverStaminaNinja();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudNinja();
 }
 
 
 //Funções main de execução de mecânicas do Arqueiro
 function mainArqueiroHeavyAttack(){
-    if (arqueiro.stamina > 0) {
+    if (arqueiro.stamina > 0 && canPlayP1) {
         heavyAttackArqueiro();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudArqueiro();
+    updatingHudP2();
 }
 function mainArqueiroLightAttack(){
-    if(arqueiro.stamina > 0){
+    if(arqueiro.stamina > 0 && canPlayP1){
         lightAttackArqueiro();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudArqueiro();
+    updatingHudP2();
 }
 function mainArqueiroRecoverHP(){
-    if (arqueiro.hp < 80 && arqueiro.item > 0) {
+    if (arqueiro.hp < 80 && arqueiro.item > 0 && canPlayP1) {
         recoverHPArqueiro();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     }
     if(arqueiro.hp >= 80){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP" + arqueiro.hp);
     }
     if(arqueiro.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudArqueiro();
 }
 function mainArqueiroRecoverStamina(){
-    if (arqueiro.stamina < 120) {
+    if (arqueiro.stamina < 120 && canPlayP1) {
         recoverStaminaArqueiro();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudArqueiro();
 }
 
 
 //Funções main de execução de mecânicas do Orc
 function mainOrcHeavyAttack(){
-    if (orc.stamina > 0) {
+    if (orc.stamina > 0 && canPlayP1) {
         heavyAttackOrc();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudOrc();
+    updatingHudP2();
 }
 function mainOrcLightAttack(){
-    if(orc.stamina > 0){
+    if(orc.stamina > 0 && canPlayP1){
         lightAttackOrc();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudOrc();
+    updatingHudP2();
 }
 function mainOrcRecoverHP(){
-    if (orc.hp < 130 && orc.item > 0) {
+    if (orc.hp < 130 && orc.item > 0 && canPlayP1) {
         recoverHPOrc();
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
     }
     if(orc.hp >= 130){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP" + orc.hp);
     }
     if(orc.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudOrc();
 }
 function mainOrcRecoverStamina(){
-    if (orc.stamina < 60) {
+    if (orc.stamina < 60 && canPlayP1) {
         recoverStaminaOrc();
-    }else{
+        canPlayP1 = false;
+        canPlayP2 = true;
+    } else if(!canPlayP1){
+        alert("É a vez do Player 2");
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
-    updateHudP1 = true;
+    canUpdateHud = true;
     hudOrc();
 }
 
@@ -608,13 +798,11 @@ function heavyAttackGuerreiro(){
 function recoverStaminaGuerreiro(){
   warrior.stamina += 12;
   alert(warrior.type + " recuperou Stamina");
-  alert("Stamina: " + warrior.stamina);
 }
 function recoverHPGuerreiro(){
   warrior.item -= 1;
   warrior.hp += 30;
   alert(warrior.type + " usou: Frasco de Estus e recuperou HP");
-  alert("HP: " + warrior.hp);
 }
 
 
@@ -725,13 +913,11 @@ function heavyAttackMago(){
 function recoverStaminaMago(){
     mago.stamina += 15;
     alert(mago.type + " recuperou Stamina");
-    alert("Stamina: " + mago.stamina);
 }
 function recoverHPMago(){
     mago.item -= 1;
     mago.hp += 38;
     alert(mago.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + mago.hp);
 }
 
 
@@ -841,13 +1027,11 @@ function heavyAttackMonge(){
 function recoverStaminaMonge(){
     monge.stamina += 20;
     alert(monge.type + " recuperou Stamina");
-    alert("Stamina: " + monge.stamina);
 }
 function recoverHPMonge(){
     monge.item -= 1;
     monge.hp += 35;
     alert(monge.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + monge.hp);
 }
 
 
@@ -957,13 +1141,11 @@ function heavyAttackNinja(){
 function recoverStaminaNinja(){
     ninja.stamina += 20;
     alert(ninja.type + " recuperou Stamina");
-    alert("Stamina: " + ninja.stamina);
 }
 function recoverHPNinja(){
     ninja.item -= 1;
     ninja.hp += 30;
     alert(ninja.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + ninja.hp);
 }
 
 
@@ -1073,13 +1255,11 @@ function heavyAttackArqueiro(){
 function recoverStaminaArqueiro(){
     arqueiro.stamina += 20;
     alert(arqueiro.type + " recuperou Stamina");
-    alert("Stamina: " + arqueiro.stamina);
 }
 function recoverHPArqueiro(){
     arqueiro.item -= 1;
     arqueiro.hp += 27;
     alert(arqueiro.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + arqueiro.hp);
 }
 
 
@@ -1189,13 +1369,11 @@ function heavyAttackOrc(){
 function recoverStaminaOrc(){
     orc.stamina += 20;
     alert(orc.type + " recuperou Stamina");
-    alert("Stamina: " + orc.stamina);
 }
 function recoverHPOrc(){
     orc.item -= 1;
     orc.hp += 30;
     alert(orc.type + " usou: Frasco de Estus recuperou HP");
-    alert("HP: " + orc.hp);
 }
 
 
@@ -1218,38 +1396,73 @@ PLAYER 2
 --------------------------------------------------------------------------------------------------------
 */
 
-function pave(){
-    updateHudP1 = true;
-    //Atualizando a hud
-    switch (true) {
-        case choseGuerreiro === true:
-            hudGuerreiro();
-            break;
 
-        case chooseMago === true:
-            hudMago();
-            break;
 
-        case chooseMonge === true:
-            hudMonge();
-            break;
 
-        case chooseNinja === true:
-            hudNinja();
-            break;
 
-        case chooseArqueiro === true:
-            hudArqueiro();
-            break;
 
-        case chooseOrc === true:
-            hudOrc();
-            break;
-    
-        default:
-            break;
+//Funções de atualização da HUD do player 2
+function hudGuerreiroB(){
+    let player2Hud = document.getElementById("hudP2");
+    let texto = document.createTextNode("HP: " + warriorB.hp + " Stamina: " + warriorB.stamina + " Itens: " + warriorB.item);
+    player2Hud.appendChild(texto);
+
+    if(canUpdateHud){
+        player2Hud.innerHTML = ("HP: " + warriorB.hp + " Stamina: " + warriorB.stamina + " Itens: " + warriorB.item);
     }
 }
+
+function hudMagoB(){
+    let player2Hud = document.getElementById("hudP2");
+    let texto = document.createTextNode("HP: " + magoB.hp + " Stamina: " + magoB.stamina + " Itens: " + magoB.item);
+    player2Hud.appendChild(texto);
+
+    if(canUpdateHud){
+        player2Hud.innerHTML = ("HP: " + magoB.hp + " Stamina: " + magoB.stamina + " Itens: " + magoB.item);
+    }
+}
+
+function hudMongeB(){
+    let player2Hud = document.getElementById("hudP2");
+    let texto = document.createTextNode("HP: " + mongeB.hp + " Stamina: " + mongeB.stamina + " Itens: " + mongeB.item);
+    player2Hud.appendChild(texto);
+
+    if(canUpdateHud){
+        player2Hud.innerHTML = ("HP: " + mongeB.hp + " Stamina: " + mongeB.stamina + " Itens: " + mongeB.item);
+    }
+}
+
+function hudNinjaB(){
+    let player2Hud = document.getElementById("hudP2");
+    let texto = document.createTextNode("HP: " + ninjaB.hp + " Stamina: " + ninjaB.stamina + " Itens: " + ninjaB.item);
+    player2Hud.appendChild(texto);
+
+    if(canUpdateHud){
+        player2Hud.innerHTML = ("HP: " + ninjaB.hp + " Stamina: " + ninjaB.stamina + " Itens: " + ninjaB.item);
+    }
+}
+
+function hudArqueiroB(){
+    let player2Hud = document.getElementById("hudP2");
+    let texto = document.createTextNode("HP: " + arqueiroB.hp + " Stamina: " + arqueiroB.stamina + " Itens: " + arqueiroB.item);
+    player2Hud.appendChild(texto);
+
+    if(canUpdateHud){
+        player2Hud.innerHTML = ("HP: " + arqueiroB.hp + " Stamina: " + arqueiroB.stamina + " Itens: " + arqueiroB.item);
+    }
+}
+
+function hudOrcB(){
+    let player2Hud = document.getElementById("hudP2");
+    let texto = document.createTextNode("HP: " + orcB.hp + " Stamina: " + orcB.stamina + " Itens: " + orcB.item);
+    player2Hud.appendChild(texto);
+
+    if(canUpdateHud){
+        player2Hud.innerHTML = ("HP: " + orcB.hp + " Stamina: " + orcB.stamina + " Itens: " + orcB.item);
+    }
+}
+
+
 
 
 //Funções de escolha da classe do personagem
@@ -1260,6 +1473,9 @@ function p2chooseGuerreiro(){
     let chooseClassRef = document.getElementById("p2chooseClass");
     let childRef = document.getElementById("childElementp2");
     chooseClassRef.removeChild(childRef);
+
+    choseGuerreiroB = true;
+    hudGuerreiroB();
 }
 
 function p2chooseMago(){
@@ -1269,6 +1485,9 @@ function p2chooseMago(){
     let chooseClassRef = document.getElementById("p2chooseClass");
     let childRef = document.getElementById("childElementp2");
     chooseClassRef.removeChild(childRef);
+
+    chooseMagoB = true;
+    hudMagoB();
 }
 
 function p2chooseMonge(){
@@ -1278,6 +1497,9 @@ function p2chooseMonge(){
     let chooseClassRef = document.getElementById("p2chooseClass");
     let childRef = document.getElementById("childElementp2");
     chooseClassRef.removeChild(childRef);
+
+    chooseMongeB = true;
+    hudMongeB();
 }
 
 function p2chooseNinja(){
@@ -1287,6 +1509,9 @@ function p2chooseNinja(){
     let chooseClassRef = document.getElementById("p2chooseClass");
     let childRef = document.getElementById("childElementp2");
     chooseClassRef.removeChild(childRef);
+
+    chooseNinjaB = true;
+    hudNinjaB();
 }
 
 function p2chooseArqueiro(){
@@ -1296,6 +1521,9 @@ function p2chooseArqueiro(){
     let chooseClassRef = document.getElementById("p2chooseClass");
     let childRef = document.getElementById("childElementp2");
     chooseClassRef.removeChild(childRef);
+
+    chooseArqueiroB = true;
+    hudArqueiroB();
 }
 
 function p2chooseOrc(){
@@ -1305,289 +1533,379 @@ function p2chooseOrc(){
     let chooseClassRef = document.getElementById("p2chooseClass");
     let childRef = document.getElementById("childElementp2");
     chooseClassRef.removeChild(childRef);
+
+    chooseOrcB = true;
+    hudOrcB();
 }
 
 
-
-
-//Funções de status do Player 2
-function showStatusGuerreiroB(){
-    alert(`${warriorB.type}. HP: ${warriorB.hp}, Stamina: ${warriorB.stamina}, Itens: ${warriorB.item}`);
-}
-function showStatusMagoB(){
-    alert(`${magoB.type}. HP: ${magoB.hp}, Stamina: ${magoB.stamina}, Itens: ${magoB.item}`);
-}
-function showStatusMongeB(){
-    alert(`${mongeB.type}. HP: ${mongeB.hp}, Stamina: ${mongeB.stamina}, Itens: ${mongeB.item}`);
-}
-function showStatusNinjaB(){
-    alert(`${ninjaB.type}. HP: ${ninjaB.hp}, Stamina: ${ninjaB.stamina}, Itens: ${ninjaB.item}`);
-}
-function showStatusArqueiroB(){
-    alert(`${arqueiroB.type}. HP: ${arqueiroB.hp}, Stamina: ${arqueiroB.stamina}, Itens: ${arqueiroB.item}`);
-}
-function showStatusOrcB(){
-    alert(`${orcB.type}. HP: ${orcB.hp}, Stamina: ${orcB.stamina}, Itens: ${orcB.item}`);
-}
 
 
 
 //Funções main de execução de mecânicas do Guerreiro
 function mainGuerreiroBHeavyAttack(){
-    if (warriorB.stamina > 0) {
+    if (warriorB.stamina > 0 && canPlayP2) {
         heavyAttackGuerreiroB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1");
     } else{
         alert("Sem Stamina");
     }
-    updateHudP1 = true;
-    //Atualizando a hud
-    switch (true) {
-        case choseGuerreiro === true:
-            hudGuerreiro();
-            break;
-
-        case chooseMago === true:
-            hudMago();
-            break;
-
-        case chooseMonge === true:
-            hudMonge();
-            break;
-
-        case chooseNinja === true:
-            hudNinja();
-            break;
-
-        case chooseArqueiro === true:
-            hudArqueiro();
-            break;
-
-        case chooseOrc === true:
-            hudOrc();
-            break;
-    
-        default:
-            break;
-    }
-    
+    canUpdateHud = true;
+    updatingHudP1();
+    hudGuerreiroB();
 }
 function mainGuerreiroBLightAttack(){
-    if(warriorB.stamina > 0){
-        lightAttackGuerreiro();
-    }else{
+    if(warriorB.stamina > 0 && canPlayP2){
+        lightAttackGuerreiroB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } 
+    else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sem Stamina");
     }
-    pave()
+    canUpdateHud = true;
+    updatingHudP1();
+    hudGuerreiroB();
 }
 function mainGuerreiroBRecoverHP(){
-    if (warriorB.hp < 100 && warriorB.item > 0) {
+    if (warriorB.hp < 100 && warriorB.item > 0 && canPlayP2) {
         recoverHPGuerreiroB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     }
     if(warriorB.hp >= 100){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP: " + warriorB.hp);
     }
     if(warriorB.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    canUpdateHud = true;
+    hudGuerreiroB();
 }
 function mainGuerreiroBRecoverStamina(){
-    if (warriorB.stamina < 72) {
+    if (warriorB.stamina < 72 && canPlayP2) {
         recoverStaminaGuerreiroB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    canUpdateHud = true;
+    hudGuerreiroB();
 }
 
 
 //Funções main de execução de mecânicas do Mago
 function mainMagoBHeavyAttack(){
-    if (magoB.stamina > 0) {
+    if (magoB.stamina > 0 && canPlayP2) {
         heavyAttackMagoB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     } else{
         alert("Sem Stamina");
     }
+    canUpdateHud = true;
+    hudMagoB();
+    updatingHudP1();
 }
 function mainMagoBLightAttack(){
-    if(magoB.stamina > 0){
+    if(magoB.stamina > 0 && canPlayP2){
         lightAttackMagoB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sem Stamina");
     }
-
+    canUpdateHud = true;
+    hudMagoB();
+    updatingHudP1();
 }
 function mainMagoBRecoverHP(){
-    if (magoB.hp < 70 && magoB.item > 0) {
+    if (magoB.hp < 70 && magoB.item > 0 && canPlayP2) {
         recoverHPMagoB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     }
     if(magoB.hp >= 70){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP: " + magoB.hp);
     }
     if(magoB.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    canUpdateHud = true;
+    hudMagoB();
 }
 function mainMagoBRecoverStamina(){
-    if (magoB.stamina < 40) {
+    if (magoB.stamina < 40 && canPlayP2) {
         recoverStaminaMagoB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    canUpdateHud = true;
+    hudMagoB();
 }
 
 
 //Funções main de execução de mecânicas do Monge
 function mainMongeBHeavyAttack(){
-    if (mongeB.stamina > 0) {
+    if (mongeB.stamina > 0 && canPlayP2) {
         heavyAttackMongeB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     } else{
         alert("Sem Stamina");
     }
+    canUpdateHud = true;
+    hudMongeB();
+    updatingHudP1();
 }
 function mainMongeBLightAttack(){
-    if(mongeB.stamina > 0){
+    if(mongeB.stamina > 0 && canPlayP2){
         lightAttackMongeB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sem Stamina");
     }
-
+    canUpdateHud = true;
+    hudMongeB();
+    updatingHudP1();
 }
 function mainMongeBRecoverHP(){
-    if (mongeB.hp < 110 && mongeB.item > 0) {
+    if (mongeB.hp < 110 && mongeB.item > 0 && canPlayP2) {
         recoverHPMongeB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     }
     if(mongeB.hp >= 110){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP: " + mongeB.hp);
     }
     if(mongeB.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    canUpdateHud = true;
+    hudMongeB();
 }
 function mainMongeBRecoverStamina(){
-    if (mongeB.stamina < 100) {
+    if (mongeB.stamina < 100 && canPlayP2) {
         recoverStaminaMongeB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    canUpdateHud = true;
+    hudMongeB();
 }
 
 
 //Funções main de execução de mecânicas do Ninja
 function mainNinjaBHeavyAttack(){
-    if (ninjaB.stamina > 0) {
+    if (ninjaB.stamina > 0 && canPlayP2) {
         heavyAttackNinjaB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     } else{
         alert("Sem Stamina");
     }
+    canUpdateHud = true;
+    hudNinjaB();
+    updatingHudP1();
 }
 function mainNinjaBLightAttack(){
-    if(ninjaB.stamina > 0){
+    if(ninjaB.stamina > 0 && canPlayP2){
         lightAttackNinjaB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sem Stamina");
     }
-
+    canUpdateHud = true;
+    hudNinjaB();
+    updatingHudP1();
 }
 function mainNinjaBRecoverHP(){
-    if (ninjaB.hp < 90 && ninjaB.item > 0) {
+    if (ninjaB.hp < 90 && ninjaB.item > 0 && canPlayP2) {
         recoverHPNinjaB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     }
     if(ninjaB.hp >= 90){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP: " + ninjaB.hp);
     }
     if(ninjaB.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    canUpdateHud = true;
+    hudNinjaB();
 }
 function mainNinjaBRecoverStamina(){
-    if (ninjaB.stamina < 100) {
+    if (ninjaB.stamina < 100 && canPlayP2) {
         recoverStaminaNinjaB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    canUpdateHud = true;
+    hudNinjaB();
 }
 
 
 //Funções main de execução de mecânicas do Arqueiro
 function mainArqueiroBHeavyAttack(){
-    if (arqueiroB.stamina > 0) {
+    if (arqueiroB.stamina > 0 && canPlayP2) {
         heavyAttackArqueiroB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     } else{
         alert("Sem Stamina");
     }
+    canUpdateHud = true;
+    hudArqueiroB();
+    updatingHudP1();
 }
 function mainArqueiroBLightAttack(){
-    if(arqueiroB.stamina > 0){
+    if(arqueiroB.stamina > 0 && canPlayP2){
         lightAttackArqueiroB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sem Stamina");
     }
-
+    canUpdateHud = true;
+    hudArqueiroB();
+    updatingHudP1();
 }
 function mainArqueiroBRecoverHP(){
-    if (arqueiroB.hp < 80 && arqueiroB.item > 0) {
+    if (arqueiroB.hp < 80 && arqueiroB.item > 0 && canPlayP2) {
         recoverHPArqueiroB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     }
     if(arqueiroB.hp >= 80){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP: " + arqueiroB.hp);
     }
     if(arqueiroB.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    canUpdateHud = true;
+    hudArqueiroB();
 }
 function mainArqueiroBRecoverStamina(){
-    if (arqueiroB.stamina < 120) {
+    if (arqueiroB.stamina < 120 && canPlayP2) {
         recoverStaminaArqueiroB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    canUpdateHud = true;
+    hudArqueiroB();
 }
 
 
 //Funções main de execução de mecânicas do Orc
 function mainOrcBHeavyAttack(){
-    if (orcB.stamina > 0) {
+    if (orcB.stamina > 0 && canPlayP2) {
         heavyAttackOrcB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     } else{
         alert("Sem Stamina");
     }
+    canUpdateHud = true;
+    hudOrcB();
+    updatingHudP1();
 }
 function mainOrcBLightAttack(){
-    if(orcB.stamina > 0){
+    if(orcB.stamina > 0 && canPlayP2){
         lightAttackOrcB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sem Stamina");
     }
-
+    canUpdateHud = true;
+    hudOrcB();
+    updatingHudP1();
 }
 function mainOrcBRecoverHP(){
-    if (orcB.hp < 130 && orcB.item > 0) {
+    if (orcB.hp < 130 && orcB.item > 0 && canPlayP2) {
         recoverHPOrcB();
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
     }
     if(orcB.hp >= 130){
         alert("Você tomou frasco de Estus o suficiente. Seu corpo não aguentará se tomar além do que sua vitalidade permite.");
-        alert("Seu HP: " + orcB.hp);
     }
     if(orcB.item <= 0){
         alert("Você não tem frascos de Estus!");
     }
-
+    canUpdateHud = true;
+    hudOrcB();
 }
 function mainOrcBRecoverStamina(){
-    if (orcB.stamina < 60) {
+    if (orcB.stamina < 60 && canPlayP2) {
         recoverStaminaOrcB();
-    }else{
+        canPlayP2 = false;
+        canPlayP1 = true;
+    } else if(!canPlayP2){
+        alert("É a vez do Player 1")
+    } else{
         alert("Sua Stamina está totalmente recuperada!");
     }
+    canUpdateHud = true;
+    hudOrcB();
 }
 
 
@@ -1703,13 +2021,11 @@ function heavyAttackGuerreiroB(){
 function recoverStaminaGuerreiroB(){
   warriorB.stamina += 12;
   alert(warriorB.type + " recuperou Stamina");
-  alert("Stamina: " + warriorB.stamina);
 }
 function recoverHPGuerreiroB(){
   warriorB.item -= 1;
   warriorB.hp += 30;
   alert(warriorB.type + " usou: Frasco de Estus e recuperou HP");
-  alert("HP: " + warriorB.hp);
 }
 
 
@@ -1794,7 +2110,7 @@ function heavyAttackMagoB(){
         }
         
     //Diminuido a Stamina do Mago Player 2
-    let resultStamina = magoB.stamina -= 10;
+    let resultStamina = magoB.stamina -= 20;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -1820,13 +2136,11 @@ function heavyAttackMagoB(){
 function recoverStaminaMagoB(){
     magoB.stamina += 12;
     alert(magoB.type + " recuperou Stamina");
-    alert("Stamina: " + magoB.stamina);
 }
 function recoverHPMagoB(){
     magoB.item -= 1;
     magoB.hp += 30;
     alert(magoB.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + magoB.hp);
 }
 
 
@@ -1859,7 +2173,7 @@ function lightAttackMongeB(){
         }
         
     //Diminuido a Stamina do Monge Player 2
-    let resultStamina = mongeB.stamina -= 10;
+    let resultStamina = mongeB.stamina -= 20;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -1910,7 +2224,7 @@ function heavyAttackMongeB(){
         }
         
     //Diminuido a Stamina do Monge Player 2
-    let resultStamina = mongeB.stamina -= 10;
+    let resultStamina = mongeB.stamina -= 30;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -1936,13 +2250,11 @@ function heavyAttackMongeB(){
 function recoverStaminaMongeB(){
     mongeB.stamina += 12;
     alert(mongeB.type + " recuperou Stamina");
-    alert("Stamina: " + mongeB.stamina);
 }
 function recoverHPMongeB(){
     mongeB.item -= 1;
     mongeB.hp += 30;
     alert(mongeB.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + mongeB.hp);
 }
 
 
@@ -2026,7 +2338,7 @@ function heavyAttackNinjaB(){
         }
         
     //Diminuido a Stamina do Ninja Player 2
-    let resultStamina = ninjaB.stamina -= 10;
+    let resultStamina = ninjaB.stamina -= 30;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -2052,13 +2364,11 @@ function heavyAttackNinjaB(){
 function recoverStaminaNinjaB(){
     ninjaB.stamina += 12;
     alert(ninjaB.type + " recuperou Stamina");
-    alert("Stamina: " + ninjaB.stamina);
 }
 function recoverHPNinjaB(){
     ninjaB.item -= 1;
     ninjaB.hp += 30;
     alert(ninjaB.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + ninjaB.hp);
 }
 
 
@@ -2091,7 +2401,7 @@ function lightAttackArqueiroB(){
         }
         
     //Diminuido a Stamina do Arqueiro Player 2
-    let resultStamina = arqueiroB.stamina -= 10;
+    let resultStamina = arqueiroB.stamina -= 15;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -2142,7 +2452,7 @@ function heavyAttackArqueiroB(){
         }
         
     //Diminuido a Stamina do Arqueiro Player 2
-    let resultStamina = arqueiroB.stamina -= 10;
+    let resultStamina = arqueiroB.stamina -= 25;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -2168,13 +2478,11 @@ function heavyAttackArqueiroB(){
 function recoverStaminaArqueiroB(){
     arqueiroB.stamina += 12;
     alert(arqueiroB.type + " recuperou Stamina");
-    alert("Stamina: " + arqueiroB.stamina);
 }
 function recoverHPArqueiroB(){
     arqueiroB.item -= 1;
     arqueiroB.hp += 30;
     alert(arqueiroB.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + arqueiroB.hp);
 }
 
 
@@ -2207,7 +2515,7 @@ function lightAttackOrcB(){
         }
         
     //Diminuido a Stamina do Orc Player 2
-    let resultStamina = orcB.stamina -= 10;
+    let resultStamina = orcB.stamina -= 25;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -2258,7 +2566,7 @@ function heavyAttackOrcB(){
         }
         
     //Diminuido a Stamina do Orc Player 2
-    let resultStamina = orcB.stamina -= 10;
+    let resultStamina = orcB.stamina -= 30;
 
 
     //Diminuido o HP de todos os personagens do Player 1
@@ -2284,11 +2592,9 @@ function heavyAttackOrcB(){
 function recoverStaminaOrcB(){
     orcB.stamina += 12;
     alert(orcB.type + " recuperou Stamina");
-    alert("Stamina: " + orcB.stamina);
 }
 function recoverHPOrcB(){
     orcB.item -= 1;
     orcB.hp += 30;
     alert(orcB.type + " usou: Frasco de Estus e recuperou HP");
-    alert("HP: " + orcB.hp);
 }

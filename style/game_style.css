@@ -14,6 +14,10 @@ td {
     border: 2px solid black;
 }
 
+h1 {
+    position: relative;
+}
+
 #homeAnim {
     margin-right: 10px;
     width: 100px;
@@ -48,6 +52,7 @@ td {
 
 #p1chooseClass {
     margin: 20px;
+    padding: 20px;
 }
 
 #p2chooseClass {
@@ -68,6 +73,11 @@ td {
 }
 
 #hudP1 {
-    position: absolute;
+    position: relative;
+    font-size: 20px;
+}
+
+#hudP2 {
+    position: relative;
     font-size: 20px;
 }
